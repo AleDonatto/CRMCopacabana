@@ -21,6 +21,8 @@ Route::post('main','PagesController@LoginUser')->name('conn');
 
 Route::post('index','PageControler@Index')->name('index');
 
+Route::get('salir','PagesController@Logout')->name('Salir');
+
 /*Route::get('conn',function(){
     return view('conn');
 })->name('conn');
