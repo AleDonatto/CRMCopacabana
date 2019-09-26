@@ -145,5 +145,9 @@ class PagesController extends Controller
     public function getAuthPassword()
 	{
 		return 'password';
-	}
+    }
+    public function encuesta(){
+        return view('encuesta');
+    }
+
 }
