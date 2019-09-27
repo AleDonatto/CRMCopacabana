@@ -21,7 +21,11 @@ Route::post('main','PagesController@LoginUser')->name('conn');
 
 Route::post('index','PageControler@Index')->name('index');
 
+<<<<<<< HEAD
 Route::get('encuesta','PagesController@encuesta')->name('encuesta');
+=======
+Route::get('salir','PagesController@Logout')->name('Salir');
+>>>>>>> 17c713800ca7e25abe4416b4c327436eb66b7ea4
 
 /*Route::get('conn',function(){
     return view('conn');

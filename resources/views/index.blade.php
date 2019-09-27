@@ -1,3 +1,6 @@
+@if(!session('idUser'))
+    return view('welcome');
+@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +37,7 @@
                                 <span>Configuraciones</span>
                             </a>
                             <a href="" class="dropdown-item">Another action</a>
-                            <a href="{{ route('iniciar') }}" class="dropdown-item">
+                            <a href="{{ route('Salir') }}" class="dropdown-item">
                                 <i class="fa fa-sign-out-alt"></i>
                                 <span>Cerrar Session</span>
                             </a>
@@ -44,18 +47,14 @@
             </div>
         </div>
     </nav>
-
-    <!--<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a href="" class="navbar-brand col-sm-3 col-md-2 mr-0">Logo</a>
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-            <div class="dropdown-menu" aria-labelledby="dropdown07">
-                <a href="#" class="dropdown-item">Opcion 1</a>
-                <a href="#" class="dropdown-item">Opcion 2</a>
-                <a href="#" class="dropdown-item">Cerra Session</a>
-            </div>
-        </li>
-    </nav>-->
+    <h1>session('Nombre')</h1>
+    <h1></h1>
+    <h1></h1>
+    <h1></h1>
+    <h1></h1>
+    <div class="container-fluid">
+        @yield('Admin')
+    </div>
 
     <!--<div class="container-fluid">
         <div class="row">

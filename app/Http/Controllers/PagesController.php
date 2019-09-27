@@ -69,15 +69,47 @@ class PagesController extends Controller
                 'password'=>'required|string'
             ]
         );
-        $result = DB::select('select * from Usuarios where Nombre= :name and password= :pass',[]);
+        $result = DB::select('select * from Usuarios WHERE Nombre = :Nombre',['Nombre'=>$datos['Nombre']]);
         $nombreok;
         $passwordok;
-        
+        $nombre = $datos['Nombre'];
+        $password= $datos['password'];
+
         foreach($result as $post ){
-            $nombreok = $post -> Nombre;
-            $passwordok = $post-> password;
+            $id = $post->idUser;
+            $nombreok = $post->Nombre;
+            $apellidos = $post->Apellidos;
+            $nick = $post->Nick;
+            $permiso = $post->idPermiso;
+            $passwordok = $post->password;
         }
-        return $passwordok;
+
+        if($nombreok == $nombre){
+            //return 'Nombres Correctos';
+            if($passwordok == $password){
+                //session_start();
+                session(['idUser'=>$id]);
+                session(['Nombre'=>$nombre]);
+                session(['Apellidos'=>$apellidos]);
+                session(['Nick'=>$nick]);
+                session(['Permiso'=>$permiso]);
+                /*$_SESSION['idUser']=$id;
+                $_SESSION['Nombre']=$nombre;
+                $_SESSION['Apellidos']=$apellidos;
+                $_SESSION['Nick']=$nick;
+                $_SESSION['Permiso']=$permiso;*/
+                return view('index');
+            }else{
+                return back()
+                    ->withErrors(['password'=>trans('auth.failed')])
+                    ->withInput(request(['password']));
+            }
+        }
+        else{
+            return back()
+                ->withErrors(['Nombre'=>trans('auth.failed')])
+                ->withInput(request(['Nombre']));
+        }
 
         /*if(Auth::attempt($datos)){
             return $datos;
@@ -133,8 +165,9 @@ class PagesController extends Controller
     }
 
     public function Logout(){
+        //session::flush();
         Auth::logout();
-        return redirect('welcome');
+        return view('welcome');
     }
 
     public function username()
