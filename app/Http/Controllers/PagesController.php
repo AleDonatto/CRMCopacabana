@@ -10,10 +10,16 @@ use Auth;
 
 class PagesController extends Controller
 {
+    
     //Controlador de paginas 
     public function Inicio(){
         return view('welcome');
     }
+
+    /*public function __construct()
+    {
+        $this->middleware('auth');
+    }*/
 
     // metodo de registro ejemplo
     public function IngresarDatosUser(Resquest $request){
@@ -61,7 +67,7 @@ class PagesController extends Controller
     }
 
     //metodo de login ejemplo 
-    public function LoginUser(){
+    public function LoginUser(Request $request){
         $datos = $this->Validate(
             request(),
             [
@@ -87,18 +93,12 @@ class PagesController extends Controller
         if($nombreok == $nombre){
             //return 'Nombres Correctos';
             if($passwordok == $password){
-                //session_start();
                 session(['idUser'=>$id]);
                 session(['Nombre'=>$nombre]);
                 session(['Apellidos'=>$apellidos]);
                 session(['Nick'=>$nick]);
                 session(['Permiso'=>$permiso]);
-                /*$_SESSION['idUser']=$id;
-                $_SESSION['Nombre']=$nombre;
-                $_SESSION['Apellidos']=$apellidos;
-                $_SESSION['Nick']=$nick;
-                $_SESSION['Permiso']=$permiso;*/
-                return view('index');
+                return view('contenido');
             }else{
                 return back()
                     ->withErrors(['password'=>trans('auth.failed')])
@@ -164,9 +164,11 @@ class PagesController extends Controller
         $usuarios - save();
     }
 
-    public function Logout(){
-        //session::flush();
-        Auth::logout();
+    public function Logout(Request $request){
+        //Auth::logout();
+        $request->session()->flush();
+        //Session::flush();
+        //session_destroy();
         return view('welcome');
     }
 

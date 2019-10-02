@@ -13,16 +13,6 @@
 
 Route::get('/','PagesController@Inicio');
 
-Route::get('iniciar','PagesController@Iniciar')->name('iniciar');
-
-Route::get('index','PageControler@Index')->name('index');
-
-Route::post('main','PagesController@LoginUser')->name('conn');
-
-Route::post('index','PageControler@Index')->name('index');
-
-Route::get('salir','PagesController@Logout')->name('Salir');
-
 /*Route::get('conn',function(){
     return view('conn');
 })->name('conn');
@@ -51,3 +41,16 @@ Route::get('potenciales',function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('iniciar','PagesController@Iniciar')->name('iniciar');
+
+Route::post('main','PagesController@LoginUser')->name('conn');
+
+Route::post('index','PageControler@Index')->name('index');
+
+Route::get('salir','PagesController@Logout')->name('salir');
+
+/*Route::get('salir',function(){
+    return view('cerraSession');
+})->name('salir');*/
+

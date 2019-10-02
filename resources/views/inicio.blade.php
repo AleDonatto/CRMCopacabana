@@ -60,7 +60,8 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password"
+                        value="{{ old('Nombre') }}">
 
                         <!--{!! $errors->first('password','<span class="help-block">:message</span>') !!}-->
 
