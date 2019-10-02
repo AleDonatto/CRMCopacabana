@@ -13,10 +13,24 @@
 
 Route::get('/','PagesController@Inicio');
 
+Route::get('iniciar','PagesController@Iniciar')->name('iniciar');
+
+Route::get('index','PageControler@Index')->name('index');
+
+Route::post('main','PagesController@LoginUser')->name('conn');
+
+Route::post('index','PageControler@Index')->name('index');
+
+
+Route::get('encuesta','PagesController@encuesta')->name('encuesta');
+
+Route::get('salir','PagesController@Logout')->name('Salir');
+
 /*Route::get('conn',function(){
     return view('conn');
 })->name('conn');
 */
+
 
 /* Ruta sin controlador de paginas*/
 Route::get('index',function(){

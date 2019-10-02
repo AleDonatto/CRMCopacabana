@@ -44,3 +44,34 @@
 .page-section{
     padding: 100px 0;
 }
+
+h2 {
+    color:green;      /* Color de texto rojo */
+}
+
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
+div {
+      padding: 19px;
+      background-color: white;
+    }
+
+/*    {
+  background-color: lightblue;
+}*/
+
+.input {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+body{
+    background-color: #428D57;
+    
+}

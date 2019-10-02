@@ -108,7 +108,7 @@
                         <i class="fa fa-user-tie"></i>
                         <span>special user</span>
                     </a>
-                    <a href="https://laravel-news.com" class="btn btn-success">
+                    <a href="{{ route('encuesta') }} "  class="btn btn-success">
                         <i class="fa fa-user-check"></i>
                         <span>Clientes</span>
                     </a>
