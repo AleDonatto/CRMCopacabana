@@ -21,13 +21,20 @@ Route::post('main','PagesController@LoginUser')->name('conn');
 
 Route::post('index','PageControler@Index')->name('index');
 
+<<<<<<< HEAD
 Route::get('encuesta','PagesController@encuesta')->name('encuesta');
+=======
+
+Route::get('encuesta','PagesController@encuesta')->name('encuesta');
+
+>>>>>>> 556a4c18f6348824997df0b626d89a52b518cd2b
 Route::get('salir','PagesController@Logout')->name('Salir');
 
 /*Route::get('conn',function(){
     return view('conn');
 })->name('conn');
 */
+
 
 /* Ruta sin controlador de paginas*/
 Route::get('index',function(){
@@ -52,3 +59,16 @@ Route::get('potenciales',function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('iniciar','PagesController@Iniciar')->name('iniciar');
+
+Route::post('main','PagesController@LoginUser')->name('conn');
+
+Route::post('index','PageControler@Index')->name('index');
+
+Route::get('salir','PagesController@Logout')->name('salir');
+
+/*Route::get('salir',function(){
+    return view('cerraSession');
+})->name('salir');*/
+
