@@ -15,7 +15,9 @@
                         <i class="fa fa-address-book"></i>
                         <span>Clientes y Habitacion</span>
                     </a>
-                </li>
+
+                </li>                                                  
+
                 <li class="nav-item">
                     <a href="" class="nav-link text-center">
                         <i class="fa fa-address-book"></i>
