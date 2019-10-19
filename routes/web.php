@@ -13,23 +13,9 @@
 
 Route::get('/','PagesController@Inicio');
 
-Route::get('iniciar','PagesController@Iniciar')->name('iniciar');
-
-Route::get('index','PageControler@Index')->name('index');
-
-Route::post('main','PagesController@LoginUser')->name('conn');
-
-Route::post('index','PageControler@Index')->name('index');
+//Route::post('main','PagesController@LoginPost')->name('conn');
 
 Route::get('encuesta','PagesController@encuesta')->name('encuesta');
-
-Route::get('salir','PagesController@Logout')->name('Salir');
-
-/*Route::get('conn',function(){
-    return view('conn');
-})->name('conn');
-*/
-
 
 /* Ruta sin controlador de paginas*/
 Route::get('index',function(){
@@ -37,19 +23,8 @@ Route::get('index',function(){
 })->name('index');
 
 
-
-
-/*Route::post('conn',function(){
-    return view('conn');
-})->name('conn');*/
-
-Route::get('prospectos',function(){
-    return view('prospectos');
-})->name('prospectos');
-
-Route::get('potenciales',function(){
-    return view('potenciales');
-})->name('potenciales');
+//rutas de usuario
+Route::post('main/user','PagesController@InsertUser')->name('user.insertUser');
 
 Auth::routes();
 
@@ -57,13 +32,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('iniciar','PagesController@Iniciar')->name('iniciar');
 
-Route::post('main','PagesController@LoginUser')->name('conn');
+Route::post('salir','PagesController@Logout')->name('salir');
 
-Route::post('index','PageControler@Index')->name('index');
+Route::post('main','PagesController@LoginUser')->name('main');
 
-Route::get('salir','PagesController@Logout')->name('salir');
+Route::get('form','PagesController@formUser')->name('formUser');
 
-/*Route::get('salir',function(){
-    return view('cerraSession');
-})->name('salir');*/
+Route::get('listuser','PagesController@listUsers')->name('listUser');
+
+Route::get('formclients','PagesController@formClients')->name('formclients');
+
+Route::get('allUser','PagesController@ConsUser')->name('allUser');
+
+Route::get('permisos','PagesController@Permisos')->name('permisos');
+
+//rutas de clientes
+Route::Resource('clientes','ClientesController');
+
 

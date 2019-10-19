@@ -1,9 +1,3 @@
-@if(session()->has('idUser'))
-    <a href=""></a>
-@else
-    <a href="{{ route('iniciar') }}"></a>
-@endif
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +7,21 @@
     <title>CRM</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/estilos-agencia.css') }} ">
-    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+    <!-- fontawesome-free-icons-->
+    <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.min.css') }}">
+    <!-- fontawesome
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">-->
+    <!-- jquery 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+    <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+    <!-- toastr -->
+    <script src="{{ asset('js/toastr.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.css') }}">
+    <!-- dataTable 
+    <link rel="stylesheet" href="{{ asset('css/mdb.css') }}">-->
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -45,10 +53,7 @@
             </div>
         </div>
     </nav>
-    @php 
-        $permiso = session('Permiso');
-    @endphp
-    
+
     <div class="container-fluid">
         <div class="row">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
@@ -56,21 +61,67 @@
                     MENU
                     <i class="fas fa-bars"></i>
             </button>
-            @if($permiso == 1)
-                @yield('recepcion')
-            @elseif($permiso == 2)
-                @yield('ventas')
-            @elseif($permiso == 3)
-                @yield('admin')
-            @endif
+            <nav class="collapse navbar-collapse col-md-2 d-nono d-md-block bg-light sidebar" id="navbarResponsive">
+                <div class="sidebar-sticky">
+                    @php
+                        $permiso = session('Permiso');
+                    @endphp
+
+                    @if($permiso == 1)
+                        @yield('recepcion')
+                    @elseif($permiso == 2)
+                        @yield('ventas')
+                    @elseif($permiso == 3)
+                        @yield('admin')
+                    @endif
+                </div>
+            </nav>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
+    <script type="text/javascript">
+    @if(session('messageDB'))
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.options.closeButton = true;
+                toastr.options.escapeHtml = true;
+                toastr.info("{{ Session::get('messageDB') }}","Lorem ipsum dolor sit amet consectetur",{timeOut :  5000});
+                break;
+
+            case 'warning':
+                toastr.options.closeButton = true;
+                toastr.options.escapeHtml = true;
+                toastr.warning("{{ Session::get('messageDB') }}","Lorem ipsum dolor sit amet consectetur",{timeOut :  5000});
+                break;
+
+            case 'success':
+                toastr.options.closeButton = true;
+                toastr.options.escapeHtml = true;
+                //toastr.opcions.progressBar = true;  
+                toastr.success("{{ Session::get('messageDB') }}","Lorem ipsum dolor sit amet consectetur",{timeOut :  5000});
+                break;
+
+            case 'error':
+                toastr.options.closeButton = true;
+                toastr.options.escapeHtml = true;
+                toastr.error("{{ Session::get('messageDB') }}","Lorem ipsum dolor sit amet consectetur",{timeOut :  5000});
+                break;
+        }
+    @endif
+    </script>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>-->
+    
+    <!-- dataTables -->
+    <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/datatables.min.js') }}" defer></script>
+    <!--<script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" ></script>-->
+    <script src="{{ asset('js/agency.js') }}"></script>
 </body>
 </html>

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use \Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 use App\Usuarios;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Auth;
 
 class PagesController extends Controller
@@ -16,35 +17,52 @@ class PagesController extends Controller
         return view('welcome');
     }
 
-    /*public function __construct()
-    {
-        $this->middleware('auth');
-    }*/
-
     // metodo de registro ejemplo
-    public function IngresarDatosUser(Resquest $request){
-        $validation = Validator::make($request->all(),[
-            'Nombre'=>'required|string',
-            'Apellidos'=>'required|string|max:10',
-            'Nick'=>'required|string',
-            'Contrasena'=>'required|string',
-            'PerVentas'=>'required|string',
-            'PerRecepcion'=>'required|string',
-            'PerAdmin'=>'required|string'
-        ]);
+    public function InsertUser(Request $request){
+        $validacion = $this->Validate(
+            request(),
+            [
+                'nombreuser'=>'required|string',
+                'apellidos'=>'required|string',
+                'nick'=>'required|string',
+                'clave'=>'required|string',
+                'permiso'=>'required|integer'
+            ]
+        );
 
-        if($validation->fails()){
-            return redirect('/inicio')
-            ->withInput()
-            ->withError($validation);
-        }
+        $usuarios = new Usuarios;
+        $usuarios->Nombre = $request->nombreuser;
+        $usuarios->Apellidos = $request->apellidos;
+        $usuarios->Nick = $request->nick;
+        $usuarios->password = bcrypt($request->clave);
+        $usuarios->idPermiso = $request->permiso;
+        $usuarios->save();
 
-        $usuarios = new Usuarios();
-        $usuarios -> user = $request-> user;
-        $usuarios -> password = bcrypt($request-> Contrasena);
+        $notificationUser = array(
+            'messageDB' => 'Usuario creado con exito!',
+            'alert-type' => 'success'
+        );
 
-        $usuarios -> save();
+        return back()->with($notificationUser);
+    }
 
+    public function formUser(){
+        return view('form.formUser');
+    }
+
+    public function listUsers(){
+        $usuarios = DB::table('Usuarios')->get();
+        return view('list.listUser',['Usuarios'=>$usuarios]);
+    }
+
+    public function formClients(){
+        return view('form.formClientes');
+    }
+
+    public function ConsUser(){
+        $usuarios = Usuarios::all();
+
+        return back()->with(compact('usuarios'));
     }
 
     public function LoginPost(Request $request){
@@ -58,7 +76,7 @@ class PagesController extends Controller
         }
 
         if(Auth::attempt(['Nombre'=>$request->Nombre, 'password'=>$request->password])){
-            return view('index');
+            return view('contenido');
         }else{
             return back()
                 ->withErrors(['Nombre'=>trans('auth.failed')])
@@ -90,78 +108,44 @@ class PagesController extends Controller
             $passwordok = $post->password;
         }
 
-        if($nombreok == $nombre){
-            //return 'Nombres Correctos';
-            if($passwordok == $password){
-                session(['idUser'=>$id]);
-                session(['Nombre'=>$nombre]);
-                session(['Apellidos'=>$apellidos]);
-                session(['Nick'=>$nick]);
-                session(['Permiso'=>$permiso]);
-                return view('contenido');
+        if(isset($nombreok)){  
+            if($nombre == $nombreok){
+                //return 'Nombres Correctos';
+                if($password == $passwordok){
+                    session(['idUser'=>$id]);
+                    session(['Nombre'=>$nombre]);
+                    session(['Apellidos'=>$apellidos]);
+                    session(['Nick'=>$nick]);
+                    session(['Permiso'=>$permiso]);
+                    return view('contenido');
+                }else{
+                    return back()
+                        ->withErrors(['password'=>trans('auth.failed')])
+                        ->withInput(request(['password']));
+                }
             }else{
                 return back()
-                    ->withErrors(['password'=>trans('auth.failed')])
-                    ->withInput(request(['password']));
-            }
-        }
-        else{
-            return back()
                 ->withErrors(['Nombre'=>trans('auth.failed')])
-                ->withInput(request(['Nombre']));
-        }
-
-        /*if(Auth::attempt($datos)){
-            return $datos;
+                ->withInput(request(['Nombre'])); 
+            }         
         }else{
             return back()
                 ->withErrors(['Nombre'=>trans('auth.failed')])
                 ->withInput(request(['Nombre']));
-        }*/
+        }
     }
 
     public function Iniciar(){
-        //$usuarios = App\Usuarios::all();
-        //return view('inicio',compact('usuarios'));
         return view('inicio');
     }
 
-    public function VerDatos(){
-        
-        $this ->validate(request(),[
-            'Nombre'=>'required|string',
-            'Contrasena'=>'required|string'
-        ]);
-
-        if($user == $NombreUser){
-            return view('conn');
-        }else{
-            return view('welcome');
-        }
-        
-        //$user = DB::select('select * from Usuarios');
-        //$usuarios = Usuarios::all();
-        //return view('conn',compact('usuarios'));
-
-
-        //return "Funciono el pinche metodo post juesu puta madre";
-        return view('conn');
-        //return view('user.conn',['Usuarios'=>$user]);
+    public function Permisos(){
+        $roles = DB::table('Permisos')->get();
+        return view('list.listPermisos',['Permisos'=>$roles]);
     }
 
     public function Index(){
         return view('index');
-    }
-
-    public function GuardarDatos(Request $request){
-        $usuarios = Usuarios();
-        $usuarios -> idUser = $request -> idUser;
-        $usuarios -> NameUser = $request -> NameUser;
-        $usuarios -> Correo = $request -> Correo;
-        $usuarios -> Password = $request -> Password;
-        $usuarios -> Tipo = $request -> Tipo;
-
-        $usuarios - save();
     }
 
     public function Logout(Request $request){
@@ -181,6 +165,7 @@ class PagesController extends Controller
 	{
 		return 'password';
     }
+    
     public function encuesta(){
         return view('encuesta');
     }

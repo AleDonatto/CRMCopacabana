@@ -45,7 +45,7 @@
                 <img src="{{ asset('img/copacabana.jpg') }}" alt="" class="rounded" width="200" heigh="200">
                 <h6 >Login</h6>
 
-                <form action="{{ route('conn') }}" method="POST">
+                <form action="{{ route('main') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <input type="text" class="form-control @error('Nombre') is-invalid @enderror" name="Nombre" placeholder="User"
