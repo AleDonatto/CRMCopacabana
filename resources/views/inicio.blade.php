@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login Copacanaba Beach Hotel</title>
     <link rel="stylesheet" href=" {{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.min.css') }}">
     
     <style>
     html,body{
@@ -48,12 +48,12 @@
                 <form action="{{ route('main') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <input type="text" class="form-control @error('Nombre') is-invalid @enderror" name="Nombre" placeholder="User"
-                        value="{{ old('Nombre') }}">
+                        <input type="text" class="form-control @error('nick') is-invalid @enderror" name="nick" placeholder="Nick User"
+                        value="{{ old('nick') }}">
 
                         <!--{!! $errors->first('user','<span class="help-block">:messge</span>') !!}-->
                         
-                        @error('Nombre')
+                        @error('nick')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

@@ -1,11 +1,11 @@
 @extends('contenido')
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 bg-light">
     <section class="bg-light page-section">
         <div class="container text-center">
             <h2 class="font-italic">User Roles</h2>
         </div>
         <div class="container">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover table-sm" id="dtHorizontalExample" cellspacing="0" width="100%">
                 <thead>
                     <th scope="col">idPermiso</th>
                     <th scope="col">Descripcion del Permiso</th>

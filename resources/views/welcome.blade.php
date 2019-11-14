@@ -9,7 +9,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> 
-        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">   
+        <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.min.css') }}">   
 
         <!-- Styles -->
         <style>
@@ -103,6 +103,10 @@
                     <a href="{{ route('iniciar') }}" class="btn btn-success">
                         <i class="fa fa-concierge-bell"></i>
                         <span>Recepcion</span>
+                    </a>
+                    <a href="{{ route('iniciar') }}" class="btn btn-success">
+                        <i class="fa fa-user-tag"></i>
+                        <span>Clientes Distinguidos</span>
                     </a>
                     <a href="{{ route('iniciar') }} " class="btn btn-success">
                         <i class="fa fa-user-tie"></i>

@@ -12,7 +12,7 @@ class clientes extends Model
 
     protected $fillable = ['idCliente','Nombre','ApePaterno','ApeMaterno','Profesion','FechaNac','Telefono',
     'Celular','Correo','Domicilio','CP','Ciudad','Estado','Pais','TipoCliente'];
-    public $timestamps = false;
+    //public $timestamps = false;
 
 
     

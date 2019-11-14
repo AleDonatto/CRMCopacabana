@@ -10,18 +10,20 @@ class Usuarios extends Model implements AuthenticatableContract
 {
     //
     use Authenticatable;
-    protected $table = 'Usuarios';
-    protected $primaryKey  = 'idUser';
+    protected $table = 'Users';
+    protected $primaryKey  = 'idUsuarios';
 
-    protected $fillable = ['idUser','Nombre','Apellidos','Nick','password','idPermiso'];
-    public $timestamps = false;
+    protected $fillable = ['idUsuarios','Nombre','Apellidos','Nick','password','pGrupos','pRecepcion','pClientDis','pAdmin'];
+    //public $timestamps = false;
+
+    protected $dateFormat = 'M j Y h:i:s';
 
     protected $hidden = [
         'password', 'remember_token',
     ];
 
     public static $rules = [
-		'Nombre' => 'required',
+		'Nick' => 'required',
 		'password' => 'required'
     ];
 
@@ -31,6 +33,10 @@ class Usuarios extends Model implements AuthenticatableContract
     
     public function getAuthPassword(){
       return $this->password;
+    }
+
+    public function username(){
+      return $this->Nombre;
     }
 
 }

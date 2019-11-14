@@ -1,5 +1,5 @@
 @extends('contenido')
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 bg-light">
     <section class="bg-light page-section">
         <div class="container card">
             <h2 class="text-center font-italic">Lista Clientes</h2>
@@ -67,7 +67,7 @@
     </section>
 </main>
 
-<!-- Modal -->
+<!-- Modal-edit -->
 <div class="modal fade left" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-notify modal-lg modal-right modal-info" role="document">
     <div class="modal-content">
@@ -80,6 +80,7 @@
       <div class="modal-body">
         <form action="{{ route('clientes.update','id') }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="id">ID</label>

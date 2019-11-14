@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\clientes;
+use App\Bitacora;
 
 class ClientesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('UserCheck');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +23,9 @@ class ClientesController extends Controller
     public function index()
     {
         //
+        /*$host = request()->getHttpHost();
+        return $host;*/
+        
         $clients = DB::table('clientes')->get();
         //$clientes = clientes::all();
         return view('list.listClientes',['clientes'=>$clients]);
@@ -29,6 +39,9 @@ class ClientesController extends Controller
     public function create()
     {
         //
+        $host = request()->getHttpHost();
+        //return session('Nombre');
+        return view('form.formClientes');
     }
 
     /**
@@ -75,9 +88,29 @@ class ClientesController extends Controller
         $clientes->save();
 
         $notificationUser = array(
+            'messageHeader' => 'Clientes',
             'messageDB' => 'Cliente dado de Alta con exito!',
             'alert-type' => 'success'
         );
+
+        $host = request()->getHttpHost();
+        $hora = date('l jS \of F Y h:i:s A');
+        $datos = $request->inputNombre.","
+        .$request->inputAP.","
+        .$request->inputAM.","
+        .$request->inputProfesion.","
+        .$request->inputFN.","
+        .$request->inputTelefono.","
+        .$request->inputCelular;
+
+        $bitacora = new Bitacora;
+        $bitacora->Usuario = session('idUser');
+        $bitacora->Host = $host;
+        $bitacora->Fecha = $hora;
+        $bitacora->Accion = 'Nuevo Cliente';
+        $bitacora->Tabla = 'Clientes';
+        $bitacora->Datos = $datos;
+        $bitacora->save();
 
         return back()->with($notificationUser);
     }
@@ -111,10 +144,80 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre'=>'required|string',
+            'Apaterno'=>'required|string',
+            'Amaterno'=>'required|string',
+            'profesion'=>'required|string',
+            'fn'=>'required|date',
+            'telefono'=>'required|string',
+            'celular'=>'required|string',
+            'correo'=>'required|email',
+            'direccion'=>'required|string',
+            'cp'=>'required|string',
+            'ciudad'=>'required|string',
+            'estado'=>'required|string',
+            'pais'=>'required|string',
+            'tcliente'=>'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            
+            $notificationUser = array(
+                'messageHeader' => 'Clientes',
+                'messageDB' => 'Ocurrio un problema al actualizar el dato, asegurese de llenar los campos',
+                'alert-type' => 'warning'
+            );
+
+            return back()->with($notificationUser);
+        }
+
         //
-        return $request;
+        $clientes=DB::table('Clientes')
+        ->where('idCliente',$request->id)
+        ->update([
+            'Nombre'=>$request->nombre,
+            'ApePaterno'=>$request->Apaterno,
+            'ApeMaterno'=>$request->Amaterno,
+            'Profesion'=>$request->profesion,
+            'FechaNac'=>$request->fn,
+            'Telefono'=>$request->telefono,
+            'Celular'=>$request->celular,
+            'Correo'=>$request->correo,
+            'Domicilio'=>$request->direccion,
+            'CP'=>$request->cp,
+            'Ciudad'=>$request->ciudad,
+            'Estado'=>$request->estado,
+            'Pais'=>$request->pais,
+            'TipoCliente'=>$request->tcliente]);
+
+        $notificationUser = array(
+            'messageDB' => 'Datos del Cliente actualizados con exito!',
+            'alert-type' => 'success'
+        );
+
+        $host = request()->getHttpHost();
+        $hora = date('l jS \of F Y h:i:s A');
+        $datos = $request->nombre.","
+        .$request->Apaterno.","
+        .$request->Amaterno.","
+        .$request->porfesion.","
+        .$request->fn.","
+        .$request->telefono.","
+        .$request->celular;
+
+        $bitacora = new Bitacora;
+        $bitacora->Usuario = session('idUser');
+        $bitacora->Host = $host;
+        $bitacora->Fecha = $hora;
+        $bitacora->Accion = 'Modificacion Cliente';
+        $bitacora->Tabla = 'Clientes';
+        $bitacora->Datos = $datos;
+        $bitacora->save();
+
+        return back()->with($notificationUser);
     }
 
     /**

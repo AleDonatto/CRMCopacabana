@@ -7,62 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Usuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
-    
     //Controlador de paginas 
     public function Inicio(){
         return view('welcome');
-    }
-
-    // metodo de registro ejemplo
-    public function InsertUser(Request $request){
-        $validacion = $this->Validate(
-            request(),
-            [
-                'nombreuser'=>'required|string',
-                'apellidos'=>'required|string',
-                'nick'=>'required|string',
-                'clave'=>'required|string',
-                'permiso'=>'required|integer'
-            ]
-        );
-
-        $usuarios = new Usuarios;
-        $usuarios->Nombre = $request->nombreuser;
-        $usuarios->Apellidos = $request->apellidos;
-        $usuarios->Nick = $request->nick;
-        $usuarios->password = bcrypt($request->clave);
-        $usuarios->idPermiso = $request->permiso;
-        $usuarios->save();
-
-        $notificationUser = array(
-            'messageDB' => 'Usuario creado con exito!',
-            'alert-type' => 'success'
-        );
-
-        return back()->with($notificationUser);
-    }
-
-    public function formUser(){
-        return view('form.formUser');
-    }
-
-    public function listUsers(){
-        $usuarios = DB::table('Usuarios')->get();
-        return view('list.listUser',['Usuarios'=>$usuarios]);
-    }
-
-    public function formClients(){
-        return view('form.formClientes');
-    }
-
-    public function ConsUser(){
-        $usuarios = Usuarios::all();
-
-        return back()->with(compact('usuarios'));
     }
 
     public function LoginPost(Request $request){
@@ -89,11 +40,43 @@ class PagesController extends Controller
         $datos = $this->Validate(
             request(),
             [
-                'Nombre'=>'required|string',
-                'password'=>'required|string'
+                'nick'=>'required|string',
+                'password'=>'required|string',
+                //$this->username() => 'required|string',
+                //$this->getAuthPassword() => 'required|string'
             ]
         );
-        $result = DB::select('select * from Usuarios WHERE Nombre = :Nombre',['Nombre'=>$datos['Nombre']]);
+    
+        if (Auth::attempt(['Nick'=>$datos['nick'],'password'=>$datos['password']])) {
+            // Authentication passed...
+            $result = DB::select('select * from Users WHERE Nick = :Nombre',['Nombre'=>$datos['nick']]);
+            foreach($result as $post ){
+                $id = $post->idUsuarios;
+                $nombre = $post->Nombre;
+                $apellidos = $post->Apellidos;
+                $nick = $post->Nick;
+                $pGrupos = $post->pGrupos;
+                $pRecepcion = $post->pRecepcion;
+                $pDist = $post->pClientDis;
+                $pAdmin = $post->pAdmin;
+            }
+            session(['idUser'=>$id]);
+            session(['Nombre'=>$nombre]);
+            session(['Apellidos'=>$apellidos]);
+            session(['Nick'=>$nick]);
+            session(['pGrupos'=>$pGrupos]);
+            session(['pRecepcion'=>$pRecepcion]);
+            session(['pDist'=>$pDist]);
+            session(['pAdmin'=>$pAdmin]);
+            return view('contenido');
+            //return redirect()->intended('contenido');
+        }else{
+            return back()
+                ->withErrors(['nick'=>trans('auth.failed')])
+                ->withInput(request(['nick']));
+        }
+
+        /*$result = DB::select('select * from Usuarios WHERE Nombre = :Nombre',['Nombre'=>$datos['Nombre']]);
         $nombreok;
         $passwordok;
         $nombre = $datos['Nombre'];
@@ -132,42 +115,36 @@ class PagesController extends Controller
             return back()
                 ->withErrors(['Nombre'=>trans('auth.failed')])
                 ->withInput(request(['Nombre']));
-        }
+        }*/
     }
 
     public function Iniciar(){
         return view('inicio');
     }
 
-    public function Permisos(){
-        $roles = DB::table('Permisos')->get();
-        return view('list.listPermisos',['Permisos'=>$roles]);
-    }
 
     public function Index(){
         return view('index');
     }
 
     public function Logout(Request $request){
-        //Auth::logout();
+        Auth::logout();
         $request->session()->flush();
-        //Session::flush();
+        //session::flush();
         //session_destroy();
         return view('welcome');
-    }
-
-    public function username()
-    {
-        return 'Nombre';
-    }
-
-    public function getAuthPassword()
-	{
-		return 'password';
     }
     
     public function encuesta(){
         return view('encuesta');
+    }
+
+    public function username(){
+        return 'Nick';
+    }
+
+    public function getAuthPassword(){
+		return 'password';
     }
 
 }

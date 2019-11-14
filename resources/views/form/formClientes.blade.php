@@ -1,11 +1,11 @@
 @extends('contenido')
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 bg-light">
   <!-- formulario clientes-->
   <section class="bg-light page-section">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="font-italic">Alta Clientes</h2>
+        <div class="col-lg-12">
+          <h2 class="font-italic">Registro de Clientes</h2>
           <br>
         </div>
       </div>
@@ -179,11 +179,73 @@
                 @enderror
               </div>
             </div>
-            <button type="submit" class="btn btn-success">Registrar Clientes</button>
+
+            <!--<hr>
+            <div class="form-row">
+              <h2 class="font-italic">Habitaciones</h2>
+              <br>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="habitacion">Numero de habitacion</label>
+                <input type="text" name="habitacion" id="" class="form-control @error('habitacion') is-invalid @enderror"
+                placeholder="Numero de Habitacion" value="{{ old('habitacion') }}">
+
+                @error('habitacion')
+                  <span class="invalid-feedback">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+              <div class="form-group col-md-3">
+                <label for="fInicio">Fecha Inicio</label>
+                <input type="date" name="fInicio" id="" class="form-control">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="fFin">Fecha Fin</label>
+                <input type="date" name="fFin" id="fFin" class="form-control">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="input">Input</label>
+                <input type="text" class="form-control" name="input" placeholder="input">
+              </div>
+            </div>-->
+            
+            <button type="submit" class="btn btn-success">
+              <i class="fa fa-check-circle"></i>
+              <span>Registrar Cliente</span>
+            </button>
           </form>
         </div>
       </div>
     </div>
   </section>
-
 </main>
+
+<!-- modal agregar habitacion -->
+<div class="modal fade left" id="exampleModalUserquestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Habitaciones</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <h5>¿Desea agregar habitacion al cliente?</h5>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+                <span>No gracias</span>
+              </button>
+              <button type="submit" class="btn btn-info">
+                <i class="fa fa-check"></i>
+                <span>Simon</span>
+              </button>
+            </div>
+        </div>
+    </div>
+</div>

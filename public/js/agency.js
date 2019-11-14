@@ -5,7 +5,6 @@ $(document).ready(function () {
   $('.dataTables_length').addClass('bs-select');
   });
 
-
 $('#exampleModal').on('show.bs.modal', function(event){
     var button = $(event.relatedTarget)
     var id = button.data('id')
@@ -41,4 +40,86 @@ $('#exampleModal').on('show.bs.modal', function(event){
     modal.find('.modal-body #estado').val(estado);
     modal.find('.modal-body #pais').val(pais);
     modal.find('.modal-body #tcliente').val(tcliente);
+});
+
+$('#exampleModalUser').on('show.bs.modal',function(event){
+  var button = $(event.relatedTarget)
+  var iduser = button.data('id')
+  var nombre = button.data('nombre')
+  var apellidos = button.data('apellidos')
+  var nick = button.data('nick')
+  var permiso = button.data('permiso')
+  
+
+  var modal=$(this)
+  modal.find('.modal-body #id').val(iduser)
+  modal.find('.modal-body #nombre').val(nombre)
+  modal.find('.modal-body #apellidos').val(apellidos)
+  modal.find('.modal-body #nick').val(nick)
+
+  if(permiso == 1){
+    modal.find('.modal-body #permisoR').prop('checked',true)
+  }
+  if(permiso == 2){
+    modal.find('.modal-body #permisoVG').prop('checked',true)
+  }
+  if(permiso == 3){
+    modal.find('.modal-body #permisoA').prop('checked',true)
+  }
+});
+
+$('#exampleModalUserdelete').on('show.bs.modal',function(event){
+  var button = $(event.relatedTarget)
+  var id = button.data('id')
+
+  var modal=$(this)
+  modal.find('.modal-body #id').val(id)
+});
+
+
+$('#ModalEditCotizacion').on('show.bs.modal', function(event){
+  var button = $(event.relatedTarget)
+  var idGrupo = button.data('grupo')
+  var nombregrupo = button.data('nombregrupo')
+  var fInicio = button.data('fechainicio')
+  var fFin = button.data('fechafin')
+  var habitaciones = button.data('habitaciones')
+
+  var modal=$(this)
+  modal.find('.modal-body #grupo').val(idGrupo);
+  modal.find('.modal-body #nombregrupo').val(nombregrupo);
+  modal.find('.modal-body #fechainicio').val(fInicio);
+  modal.find('.modal-body #fechafin').val(fFin);
+  modal.find('.modal-body #habitaciones').val(habitaciones);
+});
+
+$('#modalSalones').on('show.bs.modal',function(event){
+  var button = $(event.relatedTarget)
+  var idcotizacion = button.data('idcotizacion')
+
+  var modal=$(this)
+  modal.find('.modal-body #idcotizacion').val(idcotizacion);
+});
+
+$('#modalEditSalones').on('show.bs.modal', function(event){
+  var button = $(event.relatedTarget)
+  var id = button.data('id')
+  var grupo = button.data('grupo')
+  var fecha = button.data('fecha')
+  var horainicio = button.data('horainicio')
+  var horafin = button.data('horafin')
+  var salon = button.data('salon')
+
+  var modal = $(this)
+  modal.find('.modal-body #idcotizacion').val(id);
+  modal.find('.modal-body #nombregrupo').val(grupo);
+  modal.find('.modal-body #fecha').val(fecha);
+  modal.find('.modal-body #hora').val(horainicio);
+  modal.find('.modal-body #horafin').val(horafin);
+  modal.find('.modal-body #salon').val(salon);
 })
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
