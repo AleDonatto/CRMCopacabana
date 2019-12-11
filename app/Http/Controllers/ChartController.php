@@ -9,6 +9,11 @@ Use App\Charts\SampleChart;
 
 class ChartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('UserCheck');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,12 +23,29 @@ class ChartController extends Controller
     {
         //
 
-        //$grafica = DB::('Eventos')
+        $grafica = DB::table('Eventos')->get();
 
         $chart = new SampleChart;
-        $chart->labels(['00', '01', '02','03','04','05','06','07']);
-        $chart->dataset('My dataset 1', 'horizontalBar', [1, 1-2, 3, 4])->options(['backgroundColor'=>'#BEF229','borderSkipped'=>'top']);
-        $chart->dataset('My dataset 2', 'horizontalBar', collect([0, 0, 5, 6]))->options(['backgroundColor'=>'#D51313','borderSkipped'=>'top']);
+        $chart->labels(['00', '01', '02','03','04','05','06']);
+        $chart->dataset('My dataset 1', 'horizontalBar', [3,2])
+            ->color("rgba(47, 209, 229,0.8)")
+            ->backgroundColor("rgba(47, 209, 229, 0.5)")
+            ->options(['borderSkipped'=>'top']);
+        $chart->dataset('My dataset 2', 'horizontalBar', collect([0, 0, 5, 6]))
+            ->color("rgba(241,44,44,0.8)")
+            ->backgroundColor("rgba(241, 44, 44, 0.5)")
+        ->options(['borderSkipped'=>'top']);
+        $chart->dataset('My dataset 3', 'horizontalBar', [3,2])
+            ->color("rgba(47, 209, 229,0.8)")
+            ->backgroundColor("rgba(47, 209, 229, 0.5)")
+            ->options(['borderSkipped'=>'top']);
+
+        /*$chart = new SampleChart;
+        $chart->labels(['00','01','02','03','04','05']);
+        $chart->dataset('My dataset 1','scatter',[3,4,0,0,0,0])
+        ->color("rgba(47,209,229,0.8)")
+        ->backgroundColor("rgba(47,209,229,0.5)")
+        ->options(['borderSkipped'=>'top']);*/
 
         return view('chart.chartEventos', [ 'EventosChart' => $chart ] );
     }

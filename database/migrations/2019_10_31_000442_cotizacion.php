@@ -21,8 +21,10 @@ class Cotizacion extends Migration
             $table->date('FechaFin');
             $table->string('NoHabitaciones');
             $table->string('Estado');
+            $table->string('Tipo');
             $table->bigInteger('Cliente_id');
             $table->foreign('Cliente_id')->references('idCliente')->on('Clientes');
+            $table->timestamps();
         });
     }
 

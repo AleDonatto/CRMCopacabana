@@ -27,7 +27,7 @@ class CotizacionController extends Controller
         //
         $cotizacion = DB::table('clientes')
         ->join('cotizacion','clientes.idCliente','=','Cotizacion.Cliente_id')
-        ->select('clientes.Nombre','clientes.ApePaterno','clientes.ApeMaterno','clientes.Telefono','clientes.Celular','clientes.Correo','cotizacion.*')
+        ->select('clientes.idCliente','clientes.Nombre','clientes.ApePaterno','clientes.ApeMaterno','clientes.Telefono','clientes.Celular','clientes.Correo','cotizacion.*')
         ->get();
 
         //$cotizacion = DB::table('Cotizacion')->get();

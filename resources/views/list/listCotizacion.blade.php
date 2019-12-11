@@ -63,10 +63,17 @@
                                     <span></span>
                                 </a>
                                 @endif
-                                <a href="" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Ver Cotizacion">
+                                @if($item->Tipo == 'Grupo')
+                                <a href="{{ route('cotizacionGrupos',$item->idCliente) }}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Ver Cotizacion" target="_blank">
                                     <i class="fas fa-print"></i>
                                     <span></span>
                                 </a>
+                                @else
+                                <a href="{{ route('cotizacionIndividual',$item->idCliente) }}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Ver Cotizacion" target="_blank">
+                                    <i class="fas fa-print"></i>
+                                    <span></span>
+                                </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach()    
@@ -135,7 +142,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- editar cotizacion -->
 <div class="modal fade left" id="ModalEditCotizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

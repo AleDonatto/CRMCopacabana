@@ -65,6 +65,13 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
+                                <label for="tipoCot">Tipo Cotizacion</label>
+                                <select name="tipoCot" id="" class="form-control">
+                                    <option value="Grupo">Grupo</option>
+                                    <option value="Individual">Individual</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label for="nHabitacion">Numero de Habitaciones/Personas</label>
                                 <input type="text" name="nHabitaciones" id="" class="form-control @error('nHabitaciones') is-invalid @enderror" placeholder="Habitaciones/Personas">
 

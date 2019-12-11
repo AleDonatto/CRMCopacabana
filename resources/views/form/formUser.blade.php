@@ -49,7 +49,7 @@
 
               <div class="form-group">
                 <label for="clave">Password</label>
-                <input type="password" name="clave" class="form-control @error('clave') is-invalid @enderror" id="" placeholder="Password" 
+                <input type="password" name="clave" class="form-control @error('clave') is-invalid @enderror" id="" placeholder="Password" autocomplete="new-password"
                 value="{{ old('clave') }}" >
 
                 @error('clave')
@@ -98,8 +98,8 @@
 
     //var nombre = text1.replace(/[A-Za-z]+/g, function(match){ return (match.trim()[0]);});
 
-    var nombre = text1.split(" "), total = nombre.length, resul="";
-    var apellidos = text2.split(" "), total2 = apellidos.length, resul1="";
+    var nombre = text1.split(" "), total = nombre.length, resul=""
+    var apellidos = text2.split(" "), total2 = apellidos.length, resul1=""
 
     for(var i=0; i<total; resul += nombre[i][0], i++);
 
@@ -108,8 +108,6 @@
     document.getElementById('nick').value = resul+resul1;
 
   }
-
-
 
   function Admin(checkbox){
   if(checkbox.checked){
@@ -123,7 +121,6 @@
   }
 
   if(checkbox.checked==false){
-
     document.getElementById("recepcion").disabled=false;
     document.getElementById("grupos").disabled=false;
     document.getElementById("distinguido").disabled=false;

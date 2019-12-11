@@ -26,7 +26,7 @@ class EventosController extends Controller
         $eventos = DB::table('eventos')
         ->join('cotizacion','cotizacion.idGrupo','=','Eventos.grupo_id')
         ->join('salones','salones.idSalon','=','Eventos.salon_id')
-        ->select('cotizacion.NombreGrupo','eventos.FechaInicio','eventos.HoraInicio','eventos.HoraFin','eventos.Grupo_id','salones.NombreSalon')
+        ->select('cotizacion.NombreGrupo','eventos.Fecha','eventos.HoraInicio','eventos.HoraFin','eventos.Grupo_id','salones.NombreSalon')
         ->get();
 
         return view('list.listEventos',['eventos'=>$eventos]);

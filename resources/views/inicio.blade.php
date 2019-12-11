@@ -71,6 +71,16 @@
                             </span>
                         @enderror
                     </div>
+
+                    @if( session('faild') )
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ Session::get('faild') }}</strong>
+                        <span class="invalid-feedback">
+                            
+                        </span>
+                    </div>
+                    @endif
+
                     <button class="btn  btn-success text-uppercase" type="submit">
                         <i class="fa fa-sign-in-alt"></i>
                         <span>Ingresar</span>

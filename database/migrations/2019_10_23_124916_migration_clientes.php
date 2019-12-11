@@ -22,7 +22,7 @@ class MigrationClientes extends Migration
             $table->date('FechaNac');
             $table->string('Telefono');
             $table->string('Celular');
-            $table->string('Correo')->unique();
+            $table->string('Correo');
             $table->string('Domicilio');
             $table->string('CP');
             $table->string('Ciudad');

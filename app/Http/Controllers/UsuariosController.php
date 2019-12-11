@@ -58,7 +58,7 @@ class UsuariosController extends Controller
             ]
         );
 
-        try{
+       try{
             $usuarios = new Usuarios;
             $usuarios->Nombre = $request->nombreuser;
             $usuarios->Apellidos = $request->apellidos;
@@ -101,7 +101,6 @@ class UsuariosController extends Controller
     
             return back()->with($notificationUser);
         }
-
     }
 
     /**
@@ -113,6 +112,7 @@ class UsuariosController extends Controller
     public function show($id)
     {
         //
+        return view('form.resetPassword',['idusuario'=>$id]);
     }
 
     /**
@@ -155,17 +155,16 @@ class UsuariosController extends Controller
 
         //
         $id = $request->id;
-        $clientes=DB::table('Usuarios')
-        ->where('idUser',$request->id)
+        $clientes=DB::table('Users')
+        ->where('idUsuarios',$request->id)
         ->update([
             'Nombre'=>$request->nombre,
             'Apellidos'=>$request->apellidos,
-            'Nick'=>$request->nick,
-            'idPermiso'=>$request->permiso]);
+            'Nick'=>$request->nick,]);
 
         $notificationUser = array(
             'messageHeader' => 'Usuarios',
-            'messageDB' => 'Datos del Cliente actualizados con exito!',
+            'messageDB' => 'Datos del Usuario actualizados correctamente!',
             'alert-type' => 'success'
         );
 
@@ -195,7 +194,7 @@ class UsuariosController extends Controller
     public function destroy(Request $id)
     {
         //
-        DB::table('Usuarios')->where('idUser', $id->id)->delete();
+        DB::table('Users')->where('idUsuarios', $id->id)->delete();
 
         $notificationUser = array(
             'messageHeader' => 'Usuarios',

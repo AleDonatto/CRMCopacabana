@@ -68,12 +68,15 @@ class PagesController extends Controller
             session(['pRecepcion'=>$pRecepcion]);
             session(['pDist'=>$pDist]);
             session(['pAdmin'=>$pAdmin]);
-            return view('contenido');
+            return view('dashboard');
             //return redirect()->intended('contenido');
         }else{
-            return back()
-                ->withErrors(['nick'=>trans('auth.failed')])
-                ->withInput(request(['nick']));
+            $faild = array(
+                'faild' => trans('auth.failed')
+            ); 
+            return back()->with($faild);
+                //->withErrors(['nick'=>trans('auth.failed')])
+                //->withInput(request(['nick']));
         }
 
         /*$result = DB::select('select * from Usuarios WHERE Nombre = :Nombre',['Nombre'=>$datos['Nombre']]);

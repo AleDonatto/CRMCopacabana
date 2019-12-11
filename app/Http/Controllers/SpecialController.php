@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\DB;
 use App\Usuarios;
 use App\Grupos;
 use App\Bitacora;
+use PDF;
 
 class SpecialCOntroller extends Controller
 {
     //
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('UserCheck');
     }
 
@@ -47,6 +47,7 @@ class SpecialCOntroller extends Controller
             $cotizacion->NoHabitaciones = $request->nHabitaciones;
             $cotizacion->Estado = 'Pendiente';
             $cotizacion->Cliente_id = $request->idCliente;
+            $cotizacion->Tipo = $request->tipoCot;
             $cotizacion->save();
 
             $notificationUser = array(
@@ -63,7 +64,7 @@ class SpecialCOntroller extends Controller
             $bitacora->Host = $host;
             $bitacora->Fecha = $hora;
             $bitacora->Accion = 'Nueva Cotizacion';
-            $bitacora->Tabla = 'Cotizaciones';
+            $bitacora->Tabla = 'Cotizacion';
             $bitacora->Datos = $datos;
             $bitacora->save();
 
@@ -132,5 +133,100 @@ class SpecialCOntroller extends Controller
         $bitacora->save();
 
         return back()->with($notificationUser);
+    }
+
+    public function ChangePassword(Request $request){
+
+        $validator = $this->Validate(
+            request(),[
+                'password'=>'required|string',
+                'password_confirmation'=>'required|string'
+            ]
+        ); 
+        
+        if($request->password != $request->password_confirmation){
+            $nomatch = array(
+                'dospassword'=>'Las Credenciales no Coinciden'
+            );
+            return back()->with($nomatch);
+        }
+
+        $usuarios = DB::table('Users')
+        ->where('idUsuarios',$request->user)
+        ->update([
+            'password'=> bcrypt($request->password) 
+        ]);
+
+
+        $notificationUser = array(
+            'messageHeader' => 'Usuarios',
+            'messageDB' => 'Cambio de Passowrd exitoso!',
+            'alert-type' => 'success'
+        );
+
+        $host = request()->getHttpHost();
+        $hora = date('l jS \of F Y h:i:s A');
+        $datos = $request->user;
+
+        $bitacora = new Bitacora;
+        $bitacora->Usuario = session('idUser');
+        $bitacora->Host = $host;
+        $bitacora->Fecha = $hora;
+        $bitacora->Accion = 'Cambio de contraseña Usuario';
+        $bitacora->Tabla = 'Users';
+        $bitacora->Datos = $datos;
+        $bitacora->save();
+
+        return back()->with($notificationUser);
+    }
+
+    public function CotizacionGrupos($id){
+
+        $cotizacion = DB::table('clientes')
+        ->join('cotizacion','clientes.idCliente','=','Cotizacion.Cliente_id')
+        ->select('clientes.Nombre','clientes.ApePaterno','clientes.ApeMaterno','clientes.Profesion'
+        ,'cotizacion.NombreGrupo','cotizacion.FechaInicio','cotizacion.FechaFin','cotizacion.NoHabitaciones')
+        ->where('idCliente',$id)->get();
+
+        foreach($cotizacion as $item){
+            $nombre = $item->Nombre;
+            $aPaterno = $item->ApePaterno;
+            $aMaterno = $item->ApeMaterno;
+            $profesion = $item->Profesion;
+            $grupo = $item->NombreGrupo;
+            $fechaInicio = $item->FechaInicio;
+            $fechafin = $item->FechaFin;
+            $cantidad = $item->NoHabitaciones;
+        }
+
+        $data = [
+            'grupo' => $grupo,
+            'persona' => $nombre,
+            'cantidad' => $cantidad,
+            'fechafin' => $fechafin
+        ];
+
+        //$pdf= PDF::loadView('formatos.cotGrupos');
+        //$pdf->loadHTML('<h1>Test</h1>');
+        //return $pdf->download('cotizacion.pdf');
+
+        //$pdf = PDF::loadView('formatos.cotGrupos')
+        //->stream('cotizacion.pdf');
+        //return $pdf->download('cotizacion.pdf');
+
+        $pdf = PDF::loadView('formatos.cotGrupos',$data);
+        //->stream('cotizacion.pdf');
+        //return $pdf->download('cotizacion.pdf');
+        return $pdf->stream('cotizacion.pdf');
+        //return view('formatos.cotGrupos');*/
+        
+    }
+
+    public function CotizacionIndividual(){
+        return view('formatos.cotIndividual');
+    }
+
+    public function Dashboard(){
+        return view('dashboard');
     }
 }

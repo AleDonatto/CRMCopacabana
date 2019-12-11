@@ -35,6 +35,13 @@
     z-index: 0;
 }
 
+#opcionesUser{
+    margin: auto 90%;
+}
+
+#bottonRes{
+    margin: auto 90%;
+}
 
 .opciones{
     width: 100%;

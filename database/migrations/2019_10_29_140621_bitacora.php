@@ -15,7 +15,7 @@ class Bitacora extends Migration
     {
         //
         Schema::create('Bitacora', function(Blueprint $table){
-            $table->bigIncrements('idBitacora')->primary();
+            $table->bigIncrements('idBitacora');
             $table->integer('Usuario');
             $table->string('Host');
             $table->string('Fecha');

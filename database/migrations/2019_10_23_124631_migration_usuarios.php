@@ -19,10 +19,10 @@ class MigrationUsuarios extends Migration
             $table->string('Apellidos');
             $table->string('Nick')->unique();
             $table->string('password');
-            $table->string('pGrupos')->nullable()->default('0');
-            $table->string('pRecepcion')->nullable()->default('0');
-            $table->string('pClientDis')->nullable()->default('0');
-            $table->string('pAdmin')->nullable()->default('0');
+            $table->string('pGrupos')->nullable()->default('no');
+            $table->string('pRecepcion')->nullable()->default('no');
+            $table->string('pClientDis')->nullable()->default('no');
+            $table->string('pAdmin')->nullable()->default('no');
             $table->timestamps();
         });
     }

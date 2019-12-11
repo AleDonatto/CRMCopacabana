@@ -43,26 +43,37 @@ Route::post('newCotizacion','SpecialController@CotizacionInsert')->name('newCoti
 
 Route::get('confirmCotizacion/{id}','SpecialController@ConfirmCotizacion')->name('confirmCotizacion');
 
-Route::get('cancelmCotizacion/{id}','SpecialController@CancelCotizacion')->name('cancelCotizacion');
+Route::get('cancelCotizacion/{id}','SpecialController@CancelCotizacion')->name('cancelCotizacion');
+
+Route::post('resetPassword','SpecialController@ChangePassword')->name('resetpassword');
+
+Route::get('dashboard','SpecialController@Dashboard')->name('dashboard');
 
 Route::Resource('clientes','ClientesController')->only([
     'store','update','index','create'
 ]);
 //rutas usuarios
 Route::Resource('usuarios','UsuariosController')->only([
-    'index','store','update','create','destroy'
+    'index','store','update','create','destroy','show'
 ]);
 
+//rutas cotizacion
 Route::Resource('cotizacion','CotizacionController')->only([
     'create','show','index','update','edit','destroy'
 ]);
 
+//rutas eventos
 Route::Resource('eventos','EventosController')->only([
     'store','index','update'
 ]);
 
+//rutas chart 
 Route::Resource('chart','ChartController')->only([
     'index'
 ]);
+
+Route::get('cotizacionGrupos/{id}','SpecialController@CotizacionGrupos')->name('cotizacionGrupos');
+
+Route::get('cotizacionIndividual/{id}','SpecialController@CotizacionIndividual')->name('cotizacionIndividual');
 
 

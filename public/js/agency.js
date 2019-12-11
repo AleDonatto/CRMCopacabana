@@ -48,8 +48,10 @@ $('#exampleModalUser').on('show.bs.modal',function(event){
   var nombre = button.data('nombre')
   var apellidos = button.data('apellidos')
   var nick = button.data('nick')
-  var permiso = button.data('permiso')
-  
+  var grupos = button.data('pgrupos')
+  var recepcion = button.data('precepcion')
+  var clientes = button.data('pclientes')
+  var admin = button.data('padmin')
 
   var modal=$(this)
   modal.find('.modal-body #id').val(iduser)
@@ -57,13 +59,16 @@ $('#exampleModalUser').on('show.bs.modal',function(event){
   modal.find('.modal-body #apellidos').val(apellidos)
   modal.find('.modal-body #nick').val(nick)
 
-  if(permiso == 1){
+  if(grupos == 'yes'){
     modal.find('.modal-body #permisoR').prop('checked',true)
   }
-  if(permiso == 2){
+  if(recepcion == 'yes'){
     modal.find('.modal-body #permisoVG').prop('checked',true)
   }
-  if(permiso == 3){
+  if(clientes == 'yes'){
+    modal.find('.modal-body #permisoCD').prop('checked',true)
+  }
+  if(admin == 'yes'){
     modal.find('.modal-body #permisoA').prop('checked',true)
   }
 });
@@ -117,9 +122,12 @@ $('#modalEditSalones').on('show.bs.modal', function(event){
   modal.find('.modal-body #hora').val(horainicio);
   modal.find('.modal-body #horafin').val(horafin);
   modal.find('.modal-body #salon').val(salon);
-})
+});
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
+
+
+
 
