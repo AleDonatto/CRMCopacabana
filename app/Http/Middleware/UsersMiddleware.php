@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
+use Usuarios;
 
 class UsersMiddleware
 {
@@ -15,6 +17,8 @@ class UsersMiddleware
      */
     public function handle($request, Closure $next)
     {
+        
+
         if(!auth()->check()){
             return redirect('/');
         }

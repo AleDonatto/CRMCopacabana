@@ -1,4 +1,5 @@
 @extends('contenido')
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 bg-light">
     <section class="bg-light page-section">
         <div class="container text-center">

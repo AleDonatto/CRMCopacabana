@@ -16,14 +16,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.css') }}">
     <!-- dataTable-->
     <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+
+    
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
-            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
+            
             <nav class="collapse navbar-collapse col-md-3 col-lg-2 d-nono d-md-block sidebar" id="navbarResponsive">
                 <div class="text-center">
                     <img src="{{ asset('img/copacabana.jpg') }}" class="border" alt="" width="80" heigh="80">
@@ -61,10 +60,13 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <!--<a class="navbar-brand" href="#">Container</a>-->
-            <button id="bottonRes" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!--<a class="navbar-brand" href="#">Container</a>-->
+            <!--<button id="bottonRes" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>-->
             <div class="collapse navbar-collapse" id="navbars">
                 <!--<ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -74,17 +76,17 @@
                     </li>
                 </ul>-->
                 <ul class="navbar-nav my-2 my-md-0" id="opcionesUser">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item ">
                         <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>{{ session('Nombre') }}</span>
-                            <i class="fa fa-cog"></i>
+                            <i class=""></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-md-right">
+                        <!--<div class="dropdown-menu dropdown-menu-md-right">
                             <a href="{{ route('salir') }}" class="dropdown-item">
                                 <i class="fa fa-sign-out-alt"></i>
                                 <span>Cerrar Session</span>
                             </a>
-                        </div>
+                        </div>-->
                     </li>
                 </ul>
             </div>

@@ -24,7 +24,7 @@
                         <tr style="background-color: #FBFF7A;">    
                         @elseif($item->Estado == 'Confirmado')
                         <tr style="background-color: #7DF65F;">
-                        @elseif($item->Estado == 'Cancelado')
+                        @elseif($item->Estado == 'Cancelada')
                         <tr style="background-color: #FE4141;">
                         @endif
                             <th>{{$item->idGrupo}}</th>
