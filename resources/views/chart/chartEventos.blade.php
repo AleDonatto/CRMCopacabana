@@ -51,16 +51,16 @@
 
             <ul class="nav nav-tabs nav-fill" id="mytab" role="tablist">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link active" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Salon 1</a>
+                    <a href="#home" class="nav-link active" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Bar Agave</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#home2" class="nav-link" data-toggle="tab" role="tab" aria-controls="home2" aria-selected="false">Salon 2</a>
+                    <a href="#home2" class="nav-link" data-toggle="tab" role="tab" aria-controls="home2" aria-selected="false">Salon del Mar</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#home3" class="nav-link" data-toggle="tab" role="tab" aria-controls="home3" aria-selected="false">Salon 3</a>
+                    <a href="#home3" class="nav-link" data-toggle="tab" role="tab" aria-controls="home3" aria-selected="false">Montecarlo</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#home4" class="nav-link" data-toggle="tab" role="tab" aria-controls="home4" aria-selected="false">Salon 4</a>
+                    <a href="#home4" class="nav-link" data-toggle="tab" role="tab" aria-controls="home4" aria-selected="false">Salon Loxus</a>
                 </li>
             </ul>
 
@@ -111,13 +111,13 @@
             type: 'bar'
         },
         title: {
-            text: 'Stacked bar chart'
+            text: 'Grafica de Barras Bar Agave'
         },
         subtitle: {
-            text: 'donatto.com'
+            text: 'Copacabana'
         },
         xAxis: {
-            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas'] // dias 
         },
         yAxis: {
             min: 0,
@@ -133,14 +133,14 @@
                 stacking: 'normal'
             }
         },
-        series: [{
-            name: 'John',
+        series: [{ // se le pasan la consulta 
+            name: 'Disponibles',
             data: [5, 3, 4, 7, 2]
         }, {
-            name: 'Jane',
+            name: 'Ocupado',
             data: [2, 2, 3, 2, 1]
         }, {
-            name: 'Joe',
+            name: 'DIsponible',
             data: [3, 4, 4, 2, 5]
         }]
     });
@@ -150,10 +150,10 @@
             type: 'bar'
         },
         title: {
-            text: 'Stacked bar chart'
+            text: 'Grafica de Barras Salon del mar'
         },
         subtitle: {
-            text: 'donatto.com tabla dos'
+            text: 'Copacabana'
         },
         xAxis: {
             categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
@@ -189,10 +189,10 @@
             type: 'bar'
         },
         title: {
-            text: 'Stacked bar chart'
+            text: 'Grafica de Barras Montecarlo'
         },
         subtitle: {
-            text: 'donatto.com tabla3'
+            text: 'Centro de Congreso'
         },
         xAxis: {
             categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
@@ -228,10 +228,10 @@
             type: 'bar'
         },
         title: {
-            text: 'Stacked bar chart'
+            text: 'Grafica de Barras Luxos'
         },
         subtitle: {
-            text: 'donatto.com tabla4'
+            text: 'Centro de Congreso'
         },
         xAxis: {
             categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']

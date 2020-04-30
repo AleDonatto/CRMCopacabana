@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CRM</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <!--<link rel="stylesheet" href="css/estilos-agencia.css">-->
     <link rel="stylesheet" href="{{ asset('css/estilos-agencia.css') }} ">
     <!-- fontawesome-free-icons-->
     <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.min.css') }}">

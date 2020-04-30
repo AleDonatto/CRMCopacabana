@@ -125,6 +125,17 @@ class PagesController extends Controller
         return view('inicio');
     }
 
+    public function encuesta(){
+        return view('encuesta');
+    }
+
+    public function username(){
+        return 'Nick';
+    }
+
+    public function getAuthPassword(){
+		return 'password';
+    }
 
     public function Index(){
         return view('index');
@@ -138,16 +149,4 @@ class PagesController extends Controller
         return view('welcome');
     }
     
-    public function encuesta(){
-        return view('encuesta');
-    }
-
-    public function username(){
-        return 'Nick';
-    }
-
-    public function getAuthPassword(){
-		return 'password';
-    }
-
 }

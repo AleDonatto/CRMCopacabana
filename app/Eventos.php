@@ -10,6 +10,12 @@ class Eventos extends Model
     protected $table = 'Eventos';
     //protected $primarykey = 'idGrupo';
 
-    protected $fillable = ['FechaInicio','HoraInicio','HoraFin','Grupo_id','Salon_id'];
+    protected $fillable = [
+        'FechaInicio',
+        'HoraInicio',
+        'HoraFin',
+        'Grupo_id',
+        'Salon_id'
+    ];
     public $timestamps = false;
 }

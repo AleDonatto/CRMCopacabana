@@ -186,7 +186,7 @@ class SpecialCOntroller extends Controller
         ->join('cotizacion','clientes.idCliente','=','Cotizacion.Cliente_id')
         ->select('clientes.Nombre','clientes.ApePaterno','clientes.ApeMaterno','clientes.Profesion'
         ,'cotizacion.NombreGrupo','cotizacion.FechaInicio','cotizacion.FechaFin','cotizacion.NoHabitaciones')
-        ->where('idCliente',$id)->get();
+        ->where('cotizacion.idgrupo',$id)->get();
 
         foreach($cotizacion as $item){
             $nombre = $item->Nombre;
@@ -206,6 +206,11 @@ class SpecialCOntroller extends Controller
             'fechafin' => $fechafin
         ];
 
+        $ruta = "\\public\document\\";
+        $hoy = date("Ymd");
+        $cadena =str_replace(' ', '', $grupo);
+        $nombreDocument = trim($cadena).$hoy.".pdf";
+
         //$pdf= PDF::loadView('formatos.cotGrupos');
         //$pdf->loadHTML('<h1>Test</h1>');
         //return $pdf->download('cotizacion.pdf');
@@ -215,9 +220,19 @@ class SpecialCOntroller extends Controller
         //return $pdf->download('cotizacion.pdf');
 
         $pdf = PDF::loadView('formatos.cotGrupos',$data);
+        //$pdf->render();
+        //$output = $pdf->output();
+
+        //file_put_contents( $ruta.$nombreDocument, $output);
+
+        //return PDF::loadFile(public_path().'/myfile.html')->save('/public/document/'.$ruta.$nombreDocument.'.pdf')->stream($ruta.$nombreArchivo.'.pdf');
+        //return PDF::loadview('formatos.cotGrupos',$data)->save('/public/document/'.$nombreDocument)->stream($ruta.$nombreDocument);
+
+
         //->stream('cotizacion.pdf');
         //return $pdf->download('cotizacion.pdf');
-        return $pdf->stream('cotizacion.pdf');
+        //return $pdf->stream('cotizacion.pdf');
+        return $pdf->stream($ruta.$nombreDocument);
         //return view('formatos.cotGrupos');*/
         
     }

@@ -64,12 +64,12 @@
                                 </a>
                                 @endif
                                 @if($item->Tipo == 'Grupo')
-                                <a href="{{ route('cotizacionGrupos',$item->idCliente) }}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Ver Cotizacion" target="_blank">
+                                <a href="{{ route('cotizacionGrupos',$item->idGrupo) }}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Ver Cotizacion" target="_blank">
                                     <i class="fas fa-print"></i>
                                     <span></span>
                                 </a>
                                 @else
-                                <a href="{{ route('cotizacionIndividual',$item->idCliente) }}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Ver Cotizacion" target="_blank">
+                                <a href="{{ route('cotizacionIndividual',$item->idGrupo) }}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Ver Cotizacion" target="_blank">
                                     <i class="fas fa-print"></i>
                                     <span></span>
                                 </a>

@@ -13,7 +13,17 @@ class Usuarios extends Model implements AuthenticatableContract
     protected $table = 'Users';
     protected $primaryKey  = 'idUsuarios';
 
-    protected $fillable = ['idUsuarios','Nombre','Apellidos','Nick','password','pGrupos','pRecepcion','pClientDis','pAdmin'];
+    protected $fillable = [
+      'idUsuarios',
+      'Nombre',
+      'Apellidos',
+      'Nick',
+      'password',
+      'pGrupos',
+      'pRecepcion',
+      'pClientDis',
+      'pAdmin'
+    ];
     //public $timestamps = false;
 
     protected $dateFormat = 'M j Y h:i:s';
@@ -38,5 +48,4 @@ class Usuarios extends Model implements AuthenticatableContract
     public function username(){
       return $this->Nombre;
     }
-
 }
